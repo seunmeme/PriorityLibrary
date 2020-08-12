@@ -15,7 +15,7 @@ A simple web application that implements priority queue and normal queue (FIFO).
 | + Person(name: String, type: String) |                  |  + borrowBook(book: String, libraryUser: Person) : String                                |       
 | + getName() : String    |                                |  + processPriorityQueue(book: String, libraryUsers: List<Person>) : void |                               
 | + getType() : String    |                                |   + processQueue(book: String, libraryUsers: List<Person>) : void  |   
-| + compareTo() : int     |                                |         |   
+| + compareTo() : int     |                                |   +getLibraryUsers(): List<Person>      |   
 
 
 ## Author

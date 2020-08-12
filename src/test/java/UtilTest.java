@@ -18,6 +18,16 @@ class UtilTest {
     }
 
     @Test
+    @DisplayName("Testing getLibraryUsers")
+    void getLibraryUsers() {
+        util.addUserToQueue(new Person("Tayo", "Senior Student"));
+        util.addUserToQueue(new Person("Bond", "Teacher"));
+        util.addUserToQueue(new Person("Shade", "Junior Student"));
+
+        assertTrue(util.getLibraryUsers().size() == 3);
+    }
+
+    @Test
     @DisplayName("Testing addUserToQueue")
     void addUserToQueue() {
         util.addUserToQueue(new Person("Tayo", "Senior Student"));
