@@ -1,3 +1,8 @@
+package utils;
+
+import models.Library;
+import models.Person;
+
 import java.util.*;
 
 public class Util {
@@ -11,6 +16,7 @@ public class Util {
 
 //    add books to library and increase number of books accordingly
     public void addBook(String book){
+
         int count = 1;
         if(Library.books.containsKey(book)){
             count = Library.books.get(book) + 1;
@@ -22,19 +28,26 @@ public class Util {
 //    Logic to lend book to users if available or give feedback if it's not
     public String borrowBook(String book, Person libraryUser){
 
-        if(Library.books.get(book) == null){
-            return book + " is not available at this time.";
-        }
+        try{
+
+            if(Library.books.get(book) == null){
+                throw new NullPointerException();
+            }
 
 //        Logic to reduce quantity of book after lending
-        if(Library.books.get(book) > 0){
-            int newCount = Library.books.get(book) - 1;
-            Library.books.remove(book);
-            Library.books.put(book, newCount);
+            if(Library.books.get(book) > 0){
+                int newCount = Library.books.get(book) - 1;
+                Library.books.remove(book);
+                Library.books.put(book, newCount);
 
-            return libraryUser.getType() + " got " + book + " from the library.";
-        }else{
-            return "book taken";
+                return libraryUser.getType() + " got " + book + " from the library.";
+
+            }else{
+                return "book taken";
+            }
+
+        } catch (NullPointerException e){
+            return book + " is not available at this time.";
         }
 
     }

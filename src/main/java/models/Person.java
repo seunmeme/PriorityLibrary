@@ -1,3 +1,5 @@
+package models;
+
 public class Person implements Comparable<Person>{
     private String name;
     private String type;
@@ -7,13 +9,16 @@ public class Person implements Comparable<Person>{
         this.name = name;
         this.type = type;
 
-        if (this.type == "Teacher"){
+        if ("Teacher".equals(this.type)) {
             this.rank = 1;
-        } else if (this.type == "Senior Student"){
+
+        } else if ("Senior Student".equals(this.type)) {
             this.rank = 2;
-        } else if(this.type == "Junior Student"){
+
+        } else if ("Junior Student".equals(this.type)) {
             this.rank = 3;
         }
+
 
     }
 

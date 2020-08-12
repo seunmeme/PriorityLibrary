@@ -1,6 +1,9 @@
+import models.Person;
+import utils.Util;
+
 public class Main {
     public static void main(String[] args) {
-;
+
         Util util = new Util();
 
         util.addBook("Habits");
@@ -14,6 +17,6 @@ public class Main {
         util.addUserToQueue(new Person("Tayo", "Teacher"));
 
 //        util.processPriorityQueue("Habits", Util.libraryUsers);
-        util.processQueue("Science", Util.libraryUsers);
+        util.processQueue("thong", Util.libraryUsers);
     }
 }
