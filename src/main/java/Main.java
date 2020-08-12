@@ -17,6 +17,6 @@ public class Main {
         util.addUserToQueue(new Person("Tayo", "Teacher"));
 
 //        util.processPriorityQueue("Habits", Util.libraryUsers);
-        util.processQueue("thong", Util.libraryUsers);
+        util.processQueue("Changes", util.getLibraryUsers());
     }
 }

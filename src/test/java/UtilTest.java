@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("Tests for Util class")
 class UtilTest {
 
-    Util util;
+    Util util = new Util();
 
     @BeforeEach
     void init() {
@@ -22,34 +22,62 @@ class UtilTest {
     void addUserToQueue() {
         util.addUserToQueue(new Person("Tayo", "Senior Student"));
         util.addUserToQueue(new Person("Bond", "Teacher"));
-        assertEquals(2, Util.libraryUsers.size(), "it should return " + 2);
+
+        assertEquals(2, util.getLibraryUsers().size(), "it should return " + 2);
     }
 
     @Test
     @DisplayName("Testing addBook")
     void addBook() {
         util.addBook("Change");
-        assertTrue(Library.books.containsKey("Change"));
+        util.addBook("Change");
+        util.addBook("The City");
+        assertAll(
+                () ->  assertTrue(Library.books.containsKey("Change")),
+                () ->  assertTrue(Library.books.containsKey("The City")),
+                () ->  assertEquals(2, Library.books.get("Change"))
+        );
     }
 
     @Test
     @DisplayName("Testing borrowBook")
     void borrowBook() {
-//        assertAll(
-//                () -> assertTrue(school.getGrades().get(0).getStudents().contains(applicant1)),
-//                () -> assertTrue(school.getGrades().get(1).getStudents().contains(applicant2)),
-//                () -> assertTrue(school.getGrades().get(2).getStudents().contains(applicant3)),
-//        );
+        util.addBook("Changes");
+
+        assertAll(
+                () -> assertEquals("Teacher got Changes from the library.", util.borrowBook("Changes", new Person("Tayo", "Teacher"))),
+                () -> assertEquals("book taken", util.borrowBook("Changes", new Person("Tammy", "Senior Student"))),
+                () -> assertEquals("Becoming is not available at this time.", util.borrowBook("Becoming", new Person("Tayo", "Teacher")))
+        );
 
     }
 
     @Test
     @DisplayName("Testing processPriorityQueue")
     void processPriorityQueue() {
+        util.addUserToQueue(new Person("Tayo", "Senior Student"));
+        util.addUserToQueue(new Person("Bond", "Teacher"));
+
+        util.addBook("Science");
+        util.addBook("Science");
+
+        util.processPriorityQueue("Science", util.getLibraryUsers());
+
+        assertEquals(0, Library.books.get("Science"));
     }
 
     @Test
     @DisplayName("Testing processQueue")
     void processQueue() {
+        util.addUserToQueue(new Person("Tayo", "Senior Student"));
+        util.addUserToQueue(new Person("Bond", "Teacher"));
+
+        util.addBook("Science");
+        util.addBook("Science");
+        util.addBook("Science");
+
+        util.processQueue("Science", util.getLibraryUsers());
+        assertTrue(Library.books.get("Science") == 1);
+
     }
 }

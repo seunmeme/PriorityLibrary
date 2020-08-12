@@ -7,7 +7,11 @@ import java.util.*;
 
 public class Util {
 
-    public static List<Person> libraryUsers = new ArrayList();
+    private List<Person> libraryUsers = new ArrayList();
+
+    public List<Person> getLibraryUsers() {
+        return libraryUsers;
+    }
 
     public void addUserToQueue(Person person){
         libraryUsers.add(person);
@@ -57,9 +61,9 @@ public class Util {
     public void processPriorityQueue(String book, List libraryUsers){
         PriorityQueue users = new PriorityQueue(libraryUsers);
 
-        for(int i = 0; i < libraryUsers.size(); i++){
+        for(int i = 0; i < users.size(); i++){
             Person currentUser = (Person)users.peek();
-            users.remove(currentUser);
+            libraryUsers.remove(currentUser);
             System.out.println(borrowBook(book, currentUser) );
         }
 
@@ -70,9 +74,9 @@ public class Util {
     public void processQueue(String book, List<Person> libraryUsers){
         LinkedList users = new LinkedList(libraryUsers);
 
-        for(int i = 0; i < libraryUsers.size(); i++){
+        for(int i = 0; i < users.size(); i++){
             Person currentUser = (Person)users.peek();
-            users.remove(currentUser);
+            libraryUsers.remove(currentUser);
             System.out.println(borrowBook(book, currentUser) );
         }
 
