@@ -44,7 +44,11 @@ public class Util {
                 Library.books.remove(book);
                 Library.books.put(book, newCount);
 
-                return libraryUser.getType() + " got " + book + " from the library.";
+                if(libraryUser.getType().equals("Teacher")){
+                    return "Tutor " + libraryUser.getName() + " got " + book + " from the library.";
+                }
+                return libraryUser.getName() + " got " + book + " from the library.";
+
 
             }else{
                 return "book taken";
@@ -61,6 +65,7 @@ public class Util {
 //    Implemented using stream API
     public void processPriorityQueue(String book, List<Person> libraryUsers){
 //        PriorityQueue<Person> users = new PriorityQueue<Person>(libraryUsers);
+        libraryUsers.stream().filter(user -> user.hasLibraryCard());
         PriorityQueue<Person> users = new PriorityQueue<Person>((firstUser, secondUser) -> Integer.compare(firstUser.getRank(), secondUser.getRank()));
         users.addAll(libraryUsers);
 //         for(int i = 0; i < libraryUsers.size(); i++){
