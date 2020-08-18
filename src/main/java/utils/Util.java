@@ -58,27 +58,36 @@ public class Util {
 
 
 //    Logic to process lending books based on priority
-    public void processPriorityQueue(String book, List libraryUsers){
-        PriorityQueue users = new PriorityQueue(libraryUsers);
+//    Implemented using stream API
+    public void processPriorityQueue(String book, List<Person> libraryUsers){
+//        PriorityQueue<Person> users = new PriorityQueue<Person>(libraryUsers);
+        PriorityQueue<Person> users = new PriorityQueue<Person>((firstUser, secondUser) -> Integer.compare(firstUser.getRank(), secondUser.getRank()));
+        users.addAll(libraryUsers);
+//         for(int i = 0; i < libraryUsers.size(); i++){
+////             Person currentUser = (Person)users.poll();
+////             libraryUsers.remove(currentUser);
+////             System.out.println( borrowBook(book, users.poll()) );
+////
+//         }
 
-        for(int i = 0; i < users.size(); i++){
-            Person currentUser = (Person)users.peek();
-            libraryUsers.remove(currentUser);
-            System.out.println(borrowBook(book, currentUser) );
-        }
+        libraryUsers.stream()
+               .forEach(user -> System.out.println( borrowBook(book, users.poll()) ) );
 
     }
 
 
 //    Logic to process lending books based on queue
     public void processQueue(String book, List<Person> libraryUsers){
-        LinkedList users = new LinkedList(libraryUsers);
+        LinkedList<Person> users = new LinkedList<Person> (libraryUsers);
 
-        for(int i = 0; i < users.size(); i++){
-            Person currentUser = (Person)users.peek();
-            libraryUsers.remove(currentUser);
-            System.out.println(borrowBook(book, currentUser) );
-        }
+        // for(int i = 0; i < users.size(); i++){
+        //     Person currentUser = (Person)users.peek();
+        //     libraryUsers.remove(currentUser);
+        //     System.out.println(borrowBook(book, currentUser) );
+        // }
+        users.stream()
+              .forEach(user -> System.out.println( borrowBook( book, user) ) );
+
 
     }
 

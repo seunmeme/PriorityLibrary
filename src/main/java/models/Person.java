@@ -1,6 +1,6 @@
 package models;
 
-public class Person implements Comparable<Person>{
+public class Person {
     private String name;
     private String type;
     private int rank;
@@ -30,17 +30,7 @@ public class Person implements Comparable<Person>{
         return type;
     }
 
-
-
-    @Override
-    public int compareTo(Person o) {
-        if(rank < o.rank){
-            return -1;
-        }else if(rank > o.rank){
-            return 1;
-        }else {
-            return 0;
-        }
-
+    public int getRank() {
+        return rank;
     }
 }
