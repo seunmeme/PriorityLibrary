@@ -1,13 +1,15 @@
 package models;
 
-public class Person implements Comparable<Person>{
+public class Person {
     private String name;
     private String type;
+    private boolean hasLibraryCard;
     private int rank;
 
-    public Person(String name, String type) {
+    public Person(String name, String type, boolean hasLibraryCard) {
         this.name = name;
         this.type = type;
+        this.hasLibraryCard = hasLibraryCard;
 
         if ("Teacher".equals(this.type)) {
             this.rank = 1;
@@ -22,6 +24,10 @@ public class Person implements Comparable<Person>{
 
     }
 
+    public Person(String name, String type){
+        this(name, type, false);
+    }
+
     public String getName() {
         return name;
     }
@@ -30,17 +36,11 @@ public class Person implements Comparable<Person>{
         return type;
     }
 
+    public int getRank() {
+        return rank;
+    }
 
-
-    @Override
-    public int compareTo(Person o) {
-        if(rank < o.rank){
-            return -1;
-        }else if(rank > o.rank){
-            return 1;
-        }else {
-            return 0;
-        }
-
+    public boolean hasLibraryCard() {
+        return hasLibraryCard;
     }
 }
